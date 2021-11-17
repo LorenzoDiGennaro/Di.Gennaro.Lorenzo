@@ -1,5 +1,4 @@
-# classe calcolo combinatorio
-
+from itertools import permutations
 class calcComb():
 
     def __init__(self, stringa):
@@ -19,86 +18,74 @@ class calcComb():
         self.__stringa = str
         self.__listStringa = list(stringa)
 
+    def anagrammi(self):
+        lettere = list(parola)
+
+        permutazioni = list(permutations(lettere))
+
+        temp = ''
+
+        anagrammi = []
+
+        for i in permutazioni:
+
+            for carattere in i:
+                temp += carattere
+
+            anagrammi.append(temp)
+
+            temp = ''
+
+
     def charRipetuti(self):
 
-        word = list(parola) 
+        word = list(parola)
         caratteriripetuti={}
         nCaratteri = 0
         count = 0
 
         for i in word:
-            if (i in caratteriripetuti): 
+            if (i in caratteriripetuti):
                 caratteriripetuti[str(i)] += 1
         else:
-            caratteriripetuti[str(i)] = 1 
+            caratteriripetuti[str(i)] = 1
         for i in caratteriripetuti:
             if caratteriripetuti[i]>1:
                 count+=1
                 nCaratteri += caratteriripetuti[i]
-
+               
     def combUtil(self):
-        f = open("C:/Users/User/Desktop/python/oop/words.italian.txt", 'r')
+        words = 'C:/Users/User/Desktop/python/oop/words.italian.txt'
+        f = open(words, 'r')
         for riga in f:
 
-           p = f.readline()
+           p=f.readline()
 
            if self.__stringa in p:
-               print("è una parola italiana")
-           #else:
-               #print("non è una parola italiana")
-   # PERMUTAZIONI
+               return("è una parola italiana")
+           if parola == p[:-1]:
+               return("vero")
 
-    def nPermutSenzaRip(self):
-        '''
-        restituire il numero di permutazioni SENZA ripetizione
-        '''
-        return 0
-
-    def nPermutConRip(self):
-        '''
-        restituire il numero di permutazioni CON ripetizione
-        '''
-        return 0
-
-    def permutSenzaRip(self):
-        '''
-        generare e restituire la lista di permutazioni SENZA ripetizione
-        '''
-        return 0
-
-    def permutConRip(self):
-        '''
-        generare e restituire la lista di permutazioni CON ripetizione
-        '''
-        return 0
-
-    # DISPOSIZIONI
-
-    def nDispSemplSenzaRip(self):
-        '''
-        restituire il numero di disposizioni semplici SENZA ripetizione
-        '''
-        return 0
-
-    def nDispSemplConRip(self):
-        '''
-        restituire il numero di disposizioni semplici CON ripetizione
-        '''
-        return 0
-
-    def dispSemplSenzaRip(self):
-        '''
-        generare e restituire la lista delle disposizioni semplici SENZA ripetizione
-        '''
-        return 0
+    def fattoriale(n):
+        if n==0:
+            return 1
+        else:
+            return n*fattoriale(n-1)
 
 
-    def dispSemplConRip(self):
-        '''
-        generare e restituire la lista delle disposizioni semplici CON ripetizione
-        '''
-        return 0
+    def coeffBinom(n, k):
+        x = len(parola)
+        y = int(input("Enter a value for y: "))
+        if y == 1 or y == x:
+           return(1)
+        if y > x:
+            return(0)
+        else:
+            a = fattoriale(x)
+            b = fattoriale(y)
+            div = a // (b*(x-y))
+        return(div)  
 
-parola = calcComb(str(input("inserisci una stringa: ")))
-parola.charRipetuti()
+parola= calcComb(str(input("inserisci una stringa: ")))
+parola.combUtil()
 
